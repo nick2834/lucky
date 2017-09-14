@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <link href="https://cdn.bootcss.com/bootstrap/4.0.0-beta/css/bootstrap.css" rel="stylesheet">
+    <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script type="text/javascript" src="http://apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="js/jquery.flip.min.js"></script>
+    <style>
+        /*公共样式*/
+        html {font-size: 62.5%; /* 10÷16=62.5% */}
+        @media only screen and (min-width: 320px){
+            html {font-size: 75%!important; /* 15.04÷16=94% */}
+        }
+        @media only screen and (min-width: 360px){
+            html {font-size: 94%!important; /* 15.04÷16=94% */}
+        }
+        @media only screen and (min-width: 561px){
+            html {font-size: 109%!important; /* 17.44÷16=109% */}
+        }
+        @media only screen and (min-width: 641px){
+            html {font-size: 125%!important; /* 20÷16=125% */}
+        }
+        @media only screen and (min-width: 720px){
+            html {font-size: 150%!important; /* 24÷16=150% */}
+        }
+        *{margin:0;padding:0;-moz-box-sizing:border-box;}
+        *:focus{outline:none;}
+        body{margin:0;padding:0;line-height:normal; font-size: 1rem; background: #112232;font-family: Arial;}
+        input,button{outline:medium;font-family:'stheiti','microsoft yahei','SimHei',Arial,Verdana,Helvetica,sans-serif;-webkit-appearance: none; }
+        a{text-decoration: none;}
+        input[type=text],input[type=password],input[type=number],textarea{outline:none;border:none; line-height: normal;}
+        input[type=submit],input[type=button],button{-webkit-appearance:none;border: none;}
+        ul{list-style: none;}
+        img{border: none;}
+        table,tr,td{margin: 0;padding: 0;}
+        /**/
+        .content{
+            max-width: 720px;
+            margin: 0 auto;
+            /*position: fixed;*/
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("./images/bg.jpg");
+            background-size: 100% 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        .table-view{
+            margin: 0;
+            padding: 0;
+            /*background-color: #f2f2f2;*/
+            font-size: 0;
+            display: block;
+            width: 100%;
+            white-space: normal;
+            padding: 0 10%;
+        }
+        .table-cell{
+            font-size: 17px;
+            display: inline-block;
+            text-align: center;
+            background: 0 0;
+            margin: 0;
+            padding: 5px;
+            vertical-align: top;
+            width: 33.333333%;
+            cursor: pointer;
+            position: relative;
+            color: #fff;
+        }
+        .table-cell p{
+            margin-bottom: 0;
+            font-size: .8rem;
+        }
+        .table-cell img{
+            position: relative;
+            display: block;
+            overflow: hidden;
+            color: inherit;
+            width: 100%;
+            text-align: center;
+        }
+        .table-cell a{
+            display: block;
+            overflow: hidden;
+            width: 90%;
+            text-align: center;
+            position: absolute;
+            top:34%;
+            color: #fff;
+            text-decoration: none;
+            font-size: 1rem;
+        }
+        .slider img{
+            /*width: 100%;*/
+        }
+        #viewother,#repeat,.showMore{
+            height: 3rem;
+            width: 49%;
+            border: none;
+            background: rgba(255,255,255,0.3);
+            color: #fff;
+            display: none;
+            background-image: linear-gradient(280deg,#3a95e4,#32ded0);
+            /*margin-left: 6%;*/
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        .markOver{
+            position: fixed;
+            /*position: absolute;*/
+            top:0;
+            left:0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,.6);
+            display: table;
+            width: 100%;
+            height: 100%;
+            visibility: hidden;
+            max-width: 720px;
+            margin: 0 auto;
+        }
+        .slider{
+            min-height: 30%;
+            vertical-align: middle;
+            display: table-cell;
+            text-align: center;
+        }
+        .Constellation{
+            display: inline-block;
+            padding: 10px 10px;
+            background: #fff;
+            width: 80%;
+            border-radius: 16px;
+            text-align: left;
+        }
+        .btn_group{
+            width: 80%;
+            /*margin: 1rem auto 0;*/
+            margin: 1rem auto;
+        }
+        @keyframes action_scale{
+            0%{transform: scale(0.2);opacity: 0;}
+            100%{ transform: scale(1);opacity: 1;}
+        }
+
+        @keyframes action_scaleOut{
+            0%{transform: scale(1);opacity: 1;}
+            100%{ transform: scale(0.2);opacity: 0;}
+        }
+        @media screen and (min-width:768px){
+            .table-cell{
+                width: 25%;
+            }
+            .slider{
+                font-size: 1rem;
+            }
+        }
+        .header{
+            background: url(./images/header.png) no-repeat center;
+            height: 10rem;
+            background-size: 100% 100%;
+            width: 80%;
+            margin: 1rem auto 0;
+        }
+        @media only screen and (min-width: 320px){
+
+        }
+        @media only screen and (min-width: 360px){
+            .header{
+                height: 8rem;
+            }
+        }
+        @media only screen and (min-width: 561px){
+            .header{
+                height: 8rem;
+            }
+        }
+        @media only screen and (min-width: 641px){
+
+        }
+        @media only screen and (min-width: 720px){
+            .header{
+                width: 60%;
+            }
+        }
+        .loading {
+            width:0;
+            height:0;
+            border-right:20px solid #fff;
+            border-top:20px solid #000;
+            border-left:20px solid #fff;
+            border-bottom:20px solid #000;
+            border-radius: 20px;
+            -moz-border-radius: 20px;
+            -webkit-border-radius: 20px;
+        }
+        .loading {
+            animation: bganim 0.6s linear 0s infinite;
+            -moz-animation: bganim 0.6s linear 0s infinite;
+            -webkit-animation: bganim 0.6s linear 0s infinite;
+        }
+        .loading{
+            position: absolute;
+            left: 48%;
+            top: 45%;
+            z-index: 99999;
+            margin-left: -10px;
+            margin-top: -10px;
+            display: none;
+        }
+        @keyframes bganim {
+            from { transform:rotate(0deg); } to { transform:rotate(360deg); }
+        }
+        @-moz-keyframes bganim {
+            from { -moz-transform:rotate(0deg); } to { -moz-transform:rotate(360deg); }
+        }
+        @-webkit-keyframes bganim {
+            from { -webkit-transform:rotate(0deg); } to { -webkit-transform:rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+<div class="content">
+    <div class="header"></div>
+
+    <ul class="table-view">
+        <li class="table-cell"><img src="./images/01.png" alt="shuangyu" data-title="双鱼座"><p>双鱼座</p></li>
+        <li class="table-cell"><img src="./images/02.png" alt="shuiping" data-title="水瓶座"><p>水瓶座</p></li>
+        <li class="table-cell"><img src="./images/03.png" alt="mojie" data-title="摩羯座"><p>摩羯座</p></li>
+        <li class="table-cell"><img src="./images/04.png" alt="sheshou" data-title="射手座"><p>射手座</p></li>
+        <li class="table-cell"><img src="./images/05.png" alt="tiancheng" data-title="天秤座"><p>天秤座</p></li>
+        <li class="table-cell"><img src="./images/06.png" alt="tianxie" data-title="天蝎座"><p>天蝎座</p></li>
+        <li class="table-cell"><img src="./images/07.png" alt="chunv" data-title="处女座"><p>处女座</p></li>
+        <li class="table-cell"><img src="./images/08.png" alt="shizi" data-title="狮子座"><p>狮子座</p></li>
+        <li class="table-cell"><img src="./images/09.png" alt="juxie" data-title="巨蟹座"><p>巨蟹座</p></li>
+        <li class="table-cell"><img src="./images/10.png" alt="shuangzi" data-title="双子座"><p>双子座</p></li>
+        <li class="table-cell"><img src="./images/11.png" alt="jinniu" data-title="金牛座"><p>金牛座</p></li>
+        <li class="table-cell"><img src="./images/12.png" alt="baiyang" data-title="白羊座"><p>白羊座</p></li>
+    </ul>
+    <div id="data"></div>
+
+    <div class="markOver">
+        <div class="slider">
+            <div class="loading"></div>
+        </div>
+    </div>
+    <div style="clear:both;" class="btn_group">
+        <button id="viewother">翻开其他</button>
+        <button id="repeat">再来一次</button>
+        <button class="showMore"> 再看一次</button>
+    </div>
+</div>
+<script>
+    $(function () {
+//        $('.slider').empty();
+        $(".table-view li").each(function() {
+            var p = $(this),html;
+            var index = p.index();
+            var img = p.find('img').attr('src');
+            var headTi = p.find('img').attr('data-title')
+            var title = p.find('img').attr('alt');
+            p.click(function() {
+                $(".table-view li").unbind('click'); //连续翻动
+                $.getJSON("data/api.json", function(json) {
+                    var prize = json.yes; //抽中的奖项
+                    p.flip({
+                        direction: 'rl', //翻动的方向rl：right to left
+                        speed:0.5,
+                        content: p.find('img').attr('src','./images/00.png'), //翻转后显示的内容即奖品
+                        onEnd: function() { //翻转结束
+                            p.css('background','transparent')
+                            p.attr("id", "r"); //标记中奖方块的id
+                            p.append('<a href="javascript:void(0);" class="showSlide">'+prize+'</a>')
+                            var url = 'https://route.showapi.com/872-1?showapi_appid=45725&star='+title+'&showapi_sign=2d8cd47a82d74dc7bc6672390629eddc'
+                            $.ajax({url:url, beforeSend:function () {
+                                    $('.loading').fadeIn()
+                                }, complete:function () {
+                                    $('.loading').fadeOut()
+                                }, success:function(rep){
+                                    html = '<div class="Constellation"><p style="text-align: center;font-size: 1rem">'+headTi+'今日运势</p>' +
+                                        '<p>工作运势：'+rep.showapi_res_body.day.work_txt+'</p>' +
+                                        '<p>爱情指数：'+rep.showapi_res_body.day.love_star+'</p>' +
+                                        '<p>爱情指数：'+rep.showapi_res_body.day.love_txt+'</p>' +
+                                        '<p>今日概述：'+rep.showapi_res_body.day.general_txt+'</p>' +
+                                        '<p>今日财运：'+rep.showapi_res_body.day.money_txt+'</p>' +
+                                        '<p>短评：'+rep.showapi_res_body.day.day_notice+'</p></div>';
+                                    $('.slider').html(html)
+                                }
+                            })
+                            $('.markOver').css({"visibility":'visible'});
+                            $('.slider').css({"animation":"action_scale .3s linear"});
+                            $('.showMore').show();
+                            $("#viewother").show(); //显示查看其他按钮
+                            $(".table-view li").unbind('click').css("cursor", "default").removeAttr("title");
+                        }
+                    });
+                    $("#data").data("nolist", json.no); //保存未中奖信息
+                })
+            });
+        });
+        $("#viewother").click(function() {
+            $("#viewother").hide();
+            var mydata = $("#data").data("nolist"); //获取数据
+            var mydata2 = eval(mydata);//通过eval()函数可以将JSON转换成数组
+
+            $(".table-view li").not($('#r')[0]).each(function(index) {
+                var pr = $(this);
+                pr.flip({
+                    direction: 'rl',
+                    speed:0.5,
+                    content: pr.find('img').attr('src','./images/00.png'), //奖品信息（未抽中）
+                    onEnd: function() {
+                        pr.css('background','transparent')
+                        pr.append('<a href="#">'+mydata2[index]+'</a>')
+                    }
+                });
+            });
+            $("#data").removeData("nolist");
+            $("#repeat").show()
+        });
+        $("#repeat").click(function() {
+            window.location.reload();
+        });
+        $('.markOver').click(function () {
+            $('.slider').css({"animation":"action_scaleOut .3s linear"});
+            var setInt_obj=setInterval(function(){
+//                $('.slider').css({"visibility":'hidden'});
+                $('.markOver').css({"visibility":'hidden'});
+                clearInterval(setInt_obj);
+            },260);
+        })
+        $('.showMore').click(function () {
+            $('.markOver').css({"visibility":'visible'});
+            $('.slider').css({"animation":"action_scale .3s linear"});
+        })
+    })
+</script>
+</body>
+</html>
